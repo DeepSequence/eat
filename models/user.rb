@@ -1,0 +1,5 @@
+class User < ActiveRecord::Base
+  has_secure_password
+  has_many :events_users
+  has_many :events, through: :events_users
+end
