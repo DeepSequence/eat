@@ -50,6 +50,7 @@ end
 
 get '/user' do
   @user=current_user
+  @events= @user.events 
   erb :user_home
 end
 get "/logout" do
