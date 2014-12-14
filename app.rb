@@ -53,17 +53,27 @@ get '/user' do
   @events= @user.events 
   erb :user_home
 end
+
+
+get '/new_event' do
+  @user=current_user
+  erb :new_event
+end
+
+post '/create_event' do
+  @user = current_user
+  @event=@user.events.create(name_of_event: params[:name], event_date: params[:event_date])
+  redirect("/view_event/#{@event.id}")
+end
+
+get '/view_event/:id' do
+  @event=Event.find(params[:id])
+  erb :view_event
+end
+
 get "/logout" do
   session.clear
   redirect('/')
 end
-
-
-
-
-
-
-
-
 
 

@@ -22,7 +22,7 @@
             <input type ="submit" value="login"/>
           </form>
         <%else%>
-          <p> Hello! <%=current_user.name %> </p>
+          <p> <a href="/user"><%=current_user.name %>'s events</a> </p>
           <a href="/logout" > logout</a>
         <%end%>
       </div>

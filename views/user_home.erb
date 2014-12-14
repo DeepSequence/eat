@@ -7,7 +7,7 @@
 <a href="/new_event">Create a new event</a>
 <ul>
 <% @events.each do |event|%> 
-  <li><a href="/view_event/<%=event.id%>"><%=event.name%></a></li>
+  <li><a href="/view_event/<%=event.id%>"><%=event.name_of_event%></a></li>
 <%end%>
 </ul>
 
