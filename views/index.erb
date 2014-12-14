@@ -1,3 +1,16 @@
-<% if @users.empty? %>
-  <h2> TEST This is only a test. </h2>
-  <% end %>
+<h1> Where To Eat Today </h>
+<section id="info"></section>
+<section id="signup">
+<form action="/signup" method="post">
+  <label>name
+  <input type= 'text' name='name'/></label>
+  <label>email
+  <input type ='text' name='email'/></label>
+  <label>password
+  <input type ='password' name='password'/></label>
+  <label>confirm password
+  <input type ='password' name='password_confirmation'/></label>
+  <input type ="submit" value="signup"/>
+</form
+</section>
+
