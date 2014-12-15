@@ -1,2 +1,16 @@
 <h1><%=@event.name_of_event%></h1>
 <h2><%=@event.event_date%></h2>
+
+<h3>List of Attendees</h3>
+<table>
+<tr><th>name</th><th>Attending</th><th>Preferences selected</th></tr>
+<%@event.users.each do |user|%>
+  <tr><td><%=user.name%></td><td></td><td></td></tr>
+<%end%>
+</table>
+<h2>Invite a friend </h2>
+<form action="/invite" method="post">
+<label>email: <input type='text' name='email'>
+</label> 
+<input type="submit" value="invite">
+</form>

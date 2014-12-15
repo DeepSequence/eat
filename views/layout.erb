@@ -6,10 +6,14 @@
   </head>
   <body>
     <header>
-      <h1>"Where to Eat"</h1>
+      <h1>Where2Eat</h1>
       <nav>
       <a href="/" >home</a>
       </nav>
+    <section>
+    <h2>Helping you and your friends decide what to eat</h2>
+    <p>Can't decide where to go for lunch or dinner? Does it take too long for you and your friends to decide where to go? WheretoEat will help you decide what restaurants meet everyone's needs, and give you the best option that will satisfy everyone.</p>
+    <p>After creating your account and saving your dietary and craving preferences, invite your friends to do the same! Our handy decision making tool will magically come up the best choice for you or your group.</p>
       <div id="login">
         <% if !current_user? %>
           <form action="/login" method="post">
@@ -22,7 +26,7 @@
             <input type ="submit" value="login"/>
           </form>
         <%else%>
-          <p> <a href="/user"><%=current_user.name %>'s events</a> </p>
+          <p> <a href="/user"><%=current_user.name %>'s events</a></p>
           <a href="/logout" > logout</a>
         <%end%>
       </div>
