@@ -22,7 +22,7 @@ helpers do
 end
 #might want to add the errors in red later.
 before do
-  @errors || = []
+  @errors ||=[]
 end
 get '/' do
   erb :index
@@ -33,9 +33,9 @@ post '/signup' do
   session[:user_id] = @user.id
   redirect('/user')
 end
-#looks at the email address the user typed in, 
-#if it finds the user, then it tries to authenticate the user using the has_secure_password method.
-#if they type the password correctly, then it's going to put their id in the session and redirct them to their user page.
+# looks at the email address the user typed in, 
+# if it finds the user, then it tries to authenticate the user using the has_secure_password method.
+# if they type the password correctly, then it's going to put their id in the session and redirct them to their user page.
 post '/login' do
   @user = User.find_by(email: params[:email])
   if @user
@@ -85,14 +85,14 @@ end
 post '/invite' do
   @user = User.find_by(email: params[:email]) do
     EventsUser.create!(user_id: @user.id, event_id: params[:event_id])
-    unless @user = nil
+    unless @user == nil
   end
   redirect('/view_event/#{params[:event_id]}')  
 end
 #make a post request for /view_preferences
 get '/logout' do
   session.clear
-  redirect('/')
+    redirect('/')
+  end
 end
-
 

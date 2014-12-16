@@ -5,7 +5,7 @@
 <!-- show all events that user is associated with -->
 <a href="/new_event">Create a new event</a>
 <ul>
-<% @events.each do |event|%> 
+<%@events.each do |event|%>
   <li><a href="/view_event/<%=event.id%>"><%=event.name_of_event%></a></li>
 <%end%>
 </ul>
