@@ -2,6 +2,42 @@ body{
   font-family: 'proxima-nova','Helvetica Neue', Arial, Helvetica, sans-serif;
   padding:4px;
   margin:4px;
+  background-color: #BCD7E7;
+}
+
+/* header */
+
+header{
+  width: 100%;
+  background-color: white;
+  display: inline-block;
+}
+div#logo{
+  float: left;  
+}
+nav#home {
+  float: left;
+  margin-top: 30px;
+  margin-left: 30px;
+}
+div#login {
+display: inline-block;
+float: right;
+margin-top: 20px;
+margin-right: 4px;
+}
+/* Index.erb */
+section#info{
+  border: 2px solid white;
+  border-radius: 3px;
+  float: left;
+  width: 45%;
+}
+section#signup{
+  border: 2px solid white;
+  border-radius: 3px;
+  float: right;
+  width: 45%;
 }
 table {
   border-collapse: collapse;
@@ -15,6 +51,36 @@ th {
   background-color: #406288;
   color: white;
 }
-div.login {
-display: inline-block;
+
+label{
+  width: 150px;
+  font-weight: bold;
+  font-family: Arial;
+  font-size: 15px;
+  display: inline-block;
+}
+nav li{
+  font-family: Arial;
+  font-size: 15px;
+  color: white;
+  background: black;
+  display: inline;
+  text-decoration: none;
+}
+li a{
+  text-decoration: none;
+  display: inline-block;
+  padding: 2em;
+}
+
+input[type=submit] {
+    color:#08233e;
+    font:2.4em Arial;
+    font-size:70%;
+    /* ... other rules ... */
+    cursor:pointer;
+}
+
+input[type=submit]:hover {
+    background-color:rgba(255,204,0,0.8);
 }

@@ -1,7 +1,7 @@
 require_relative './features_restaurants'
 
 #this should somehouse be turned into a pop up window with a checkmark radio buttons
-FeaturesRestaurants.create(
+Feature.create(
   [
     { name: "Sandwiches"},
     { name: "Pizza"},

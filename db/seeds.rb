@@ -1,9 +1,37 @@
-Dir[File.join(Rails.root, 'db', 'seeds', '*.rb')].sort.each { |seed| load seed }
+require_relative '../models/restaurant'
+require_relative '../models/feature'
 
-require_relative './restaurants'
+Feature.create(
+  [
+    { name: "Sandwiches"},
+    { name: "Pizza"},
+    { name: "American(Traditional)"},
+    { name: "Chinese"},
+    { name: "Burgers"},
+    { name: "Sandwiches"},
+    { name: "Delis"},
+    { name: "Mexican"},
+    { name: "Italian"},
+    { name: "Seafood"},
+    { name: "Japanese"},
+    { name: "Salad"},
+    { name: "Sushi"},
+    { name: "Thai"},
+    { name: "Indian"},
+    { name: "Mediterranean"},
+    { name: "Korean"},
+    { name: "Asian Fusion"},
+    { name: "soup"},
+    { name: "vegetarian"},
+    { name: "vegan"},
+    { name: "ramen"},
+    { name: "good coffee"},
+    { name: "good dessert"}
 
+  ]
+)
 #this should somehouse be turned into a pop up window with a checkmark radio buttons
-Restaurants.create(
+Restaurant.create(
   [
     { name: 'G Street Food', address: '1120 19th Street Northwest, Washington, DC 20036' ,url:'http://www.gstreetfood.com' , phone_number:'(202)327-2252'},
 
@@ -39,10 +67,7 @@ Restaurants.create(
 
     { name: 'Stand N Snack', address: '1133 15th Street Northwest, Washington, DC 20005' ,url:'http://www.getcosi.com' , phone_number:'(202)452-0691'},
 
-    { name: 'Cosi', address: '1501 K Street Northwest, Washington, DC 20005' ,url:'http://www.getcosi.com' , phone_number:'(202)639-8999'},
-
-
-
+    { name: 'Cosi', address: '1501 K Street Northwest, Washington, DC 20005' ,url:'http://www.getcosi.com' , phone_number:'(202)639-8999'}
 
   ]
 )

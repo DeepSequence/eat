@@ -29,7 +29,8 @@ end
 
 post '/signup' do
   @user =User.create!(name: params[:name],email: params[:email], password: params[:password],password_confirmation: params[:password_confirmation])
-  return "signed up"
+  session[:user_id] = @user.id
+  redirect("/user") 
 end
 
 post '/login' do
@@ -63,6 +64,9 @@ end
 post '/create_event' do
   @user = current_user
   @event=@user.events.create(name_of_event: params[:name], event_date: params[:event_date])
+  @event_user = EventsUser.find_by(user_id: @user.id, event_id: @event.id)
+  @event_user.attending = true
+  @event_user.save!
   redirect("/view_event/#{@event.id}")
 end
 
@@ -70,6 +74,17 @@ get '/view_event/:id' do
   @event=Event.find(params[:id])
   erb :view_event
 end
+
+post '/invite' do
+  @user=User.find_by(email: params[:email])
+  if !@user.nil?
+    EventsUser.create!(user_id: @user.id, event_id: params[:event_id])
+  end
+  redirect("/view_event/#{params[:event_id]}")  
+end
+
+
+#make a post request for /view_preferences
 
 get "/logout" do
   session.clear

@@ -1,16 +1,19 @@
 <h1><%=@event.name_of_event%></h1>
-<h2><%=@event.event_date%></h2>
-
+<h2><%=@event.event_date.strftime("%F")%></h2>
 <h3>List of Attendees</h3>
 <table>
 <tr><th>name</th><th>Attending</th><th>Preferences selected</th></tr>
-<%@event.users.each do |user|%>
-  <tr><td><%=user.name%></td><td></td><td></td></tr>
+<%@event.events_users.each do |events_user|%>
+  <tr><td><%=events_user.user.name%></td>
+      <td><%=events_user.attending ? "Yes" : "No"%></td>
+      <td><%=events_user.selected_preferences ? "Yes" : "No"%></td>
+  </tr>
 <%end%>
 </table>
 <h2>Invite a friend </h2>
 <form action="/invite" method="post">
 <label>email: <input type='text' name='email'>
 </label> 
+<input type="hidden" value="<%=@event.id%>" name="event_id">
 <input type="submit" value="invite">
 </form>
