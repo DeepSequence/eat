@@ -20,25 +20,28 @@ helpers do
     !session[:user_id].nil?
   end
 end
+#might want to add the errors in red later.
 before do
-  @errors ||= []
+  @errors || = []
 end
 get '/' do
   erb :index
 end
-
+#create user, saves id in a session using the has_secure_password method
 post '/signup' do
-  @user =User.create!(name: params[:name],email: params[:email], password: params[:password],password_confirmation: params[:password_confirmation])
+  @user = User.create!(name: params[:name], email: params[:email], password: params[:password], password_confirmation: params[:password_confirmation])
   session[:user_id] = @user.id
-  redirect("/user") 
+  redirect('/user')
 end
-
+#looks at the email address the user typed in, 
+#if it finds the user, then it tries to authenticate the user using the has_secure_password method.
+#if they type the password correctly, then it's going to put their id in the session and redirct them to their user page.
 post '/login' do
   @user = User.find_by(email: params[:email])
   if @user
     if @user.authenticate(params[:password])
       session[:user_id] = @user.id
-      redirect("/user")  
+      redirect('/user')  
     else
       @errors << "incorrect password or email"
       erb :index
@@ -48,45 +51,46 @@ post '/login' do
     erb :index
   end
 end
-
+#display the user's home page
 get '/user' do
-  @user=current_user
-  @events= @user.events 
+  @user = c urrent_user
+  @events = @user.events 
   erb :user_home
 end
-
-
+#display the form to create a new event
 get '/new_event' do
-  @user=current_user
+  @user = current_user
   erb :new_event
 end
-
+#after clicking on the submit button on the form, user creates the event in the database, then redirect to the view of the event you just created
 post '/create_event' do
   @user = current_user
-  @event=@user.events.create(name_of_event: params[:name], event_date: params[:event_date])
+  @event = @user.events.create(name_of_event: params[:name], event_date: params[:event_date])
   @event_user = EventsUser.find_by(user_id: @user.id, event_id: @event.id)
   @event_user.attending = true
   @event_user.save!
-  redirect("/view_event/#{@event.id}")
+  redirect('/view_event/#{@event.id}')
 end
-
+#this is the view_event page for every user
 get '/view_event/:id' do
-  @event=Event.find(params[:id])
+  @event = Event.find(params[:id])
   erb :view_event
 end
-
-post '/invite' do
-  @user=User.find_by(email: params[:email])
-  if !@user.nil?
-    EventsUser.create!(user_id: @user.id, event_id: params[:event_id])
-  end
-  redirect("/view_event/#{params[:event_id]}")  
+#find the restaurant by the id and view it
+get '/view_restaurant/:id' do
+  @restaurant = Restaurant.find(params[:id])
+  erb :view_restaurant
 end
-
-
+#find the user by email if they are in the database, then links them to the event. they have to be in the database already for this to work.
+post '/invite' do
+  @user = User.find_by(email: params[:email]) do
+    EventsUser.create!(user_id: @user.id, event_id: params[:event_id])
+    unless @user = nil
+  end
+  redirect('/view_event/#{params[:event_id]}')  
+end
 #make a post request for /view_preferences
-
-get "/logout" do
+get '/logout' do
   session.clear
   redirect('/')
 end

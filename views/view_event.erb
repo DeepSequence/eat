@@ -10,10 +10,8 @@
   </tr>
 <%end%>
 </table>
-<h2>Invite a friend </h2>
+<h2>Invite a friend</h2>
 <form action="/invite" method="post">
-<label>email: <input type='text' name='email'>
-</label> 
-<input type="hidden" value="<%=@event.id%>" name="event_id">
-<input type="submit" value="invite">
+<label>email: <input type='text' name='email'></label> 
+<input type="hidden" value="<%=@event.id%>"name="event_id"><input type="submit" value="invite">
 </form>
