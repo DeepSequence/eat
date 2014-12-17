@@ -69,16 +69,21 @@ post '/create_event' do
   @event_user.save!
   redirect("/view_event/#{@event.id}")
 end
+
 #this is the view_event page for every user
 get '/view_event/:id' do
   @event = Event.find(params[:id])
+  #find the association between the current user and the event
+  @event_user = EventsUser.find_by(event_id: @event.id, user_id: current_user.id)
   erb :view_event
 end
+
 #find the restaurant by the id and view it
 get '/view_restaurant/:id' do
   @restaurant = Restaurant.find(params[:id])
   erb :view_restaurant
 end
+
 #find the user by email if they are in the database, then links them to the event. they have to be in the database already for this to work.
 post '/invite' do
   @user = User.find_by(email: params[:email])
@@ -87,10 +92,40 @@ post '/invite' do
   else
     flash[:error]= "Unknown user #{params[:email]}, please ask them to signup!"
   end
-
   redirect("/view_event/#{params[:event_id]}")  
 end
+
 #make a post request for /view_preferences
+get '/pick_preferences/:event_id' do
+  @event_id = params[:event_id]
+  @features = Feature.all.sort {|a,b| a.name <=> b.name}
+  erb :pick_preferences
+end
+
+#saves the prefereces form
+post '/save_preferences' do
+  #find the link between the user and the event
+  event_user=EventsUser.find_by(user_id: current_user.id, event_id: params[:event_id])
+  #indicates the user has selected preferences for this event and saves it to the db(events_users table)
+  event_user.selected_preferences=true
+  event_user.attending=true
+  event_user.save
+  #grab all the features that were selected on the form into a features array
+  @features=params[:feature]
+  #loop over all of the feature that were selected 
+  @features.each do |feature| 
+  #create a association between event, user and feature
+    EventsUsersFeature.create(events_user_id: event_user.id, feature_id: feature)
+  end
+  redirect("/view_event/#{params[:event_id]}")
+end  
+#picks the restaurant and picks it into the event
+post '/choose_restaurant' do
+  @event = Event.find(params[:event_id])
+  @event.choose_restaurant
+  redirect("/view_event/#{@event.id}")
+end
+
 get '/logout' do
   session.clear
     redirect('/')

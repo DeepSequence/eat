@@ -1,5 +1,25 @@
 <h1><%=@event.name_of_event%></h1>
 <h2><%=@event.event_date.strftime("%F")%></h2>
+<% if @event.restaurant.nil? %>
+   <h3>Restaurant not yet selected, 
+   <form action="/choose_restaurant" method="post">
+    <input type="hidden" name="event_id" value="<%=@event.id%>">
+    <input type="submit" value="click here">
+    </form> to have computer choose
+    </h3>
+<% else %>
+   <h2>at <a href="/view_restaurant/<%=@event.restaurant.id%>"><%=@event.restaurant.name%></a> </h2>
+<% end %>
+<% if @event_user.selected_preferences %>
+  <h4>You have already selected the following preferences for this event</h4>
+  <% @event_user.features.each do |feature| %>
+    <%= feature.name %><br/>
+   <% end %>
+<% else %>
+  <h4><a href="/pick_preferences/<%=@event.id%>">Click here</a> 
+       to select your preferences for this event
+       </h4>
+<% end %>
 <h3>List of Attendees</h3>
 <table>
 <tr><th>name</th><th>Attending</th><th>Preferences selected</th></tr>
