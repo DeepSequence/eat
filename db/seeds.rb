@@ -8,7 +8,7 @@ Feature.create(
     { name: "American(Traditional)"},
     { name: "Chinese"},
     { name: "Burgers"},
-    { name: "Sandwiches"},
+    { name: "Latin"},
     { name: "Delis"},
     { name: "Mexican"},
     { name: "Italian"},
@@ -55,7 +55,7 @@ Restaurant.create(
 
     { name: 'Mio', address: '1110 Vermont Avenue Northwest, Washington, DC 20005' ,url:'http://www.miorestaurant.com' , phone_number:'(202) 955-0075'},
 
-    { name: 'Casa Blanca Restaurant', address: '1014 Vermont Avenue Northwest, Washington, DC 20005' ,url:'none' , phone_number:' (202) 393-4430'},
+    { name: 'DC Coast', address: '1401 K Street Northwest, Washington, DC 20005' ,url:'http://dccoast.com' , phone_number:' (202) 216-5988'},
 
     { name: 'Pedro & Vinny’s Burrito Cart', address: '1500 K Street  Northwest, Washington, DC 20005' ,url:'http://www.pedroandvinnys.com' , phone_number:'(571) 237-1875'},
 
@@ -71,7 +71,6 @@ Restaurant.create(
 
   ]
 )
-
 FeaturesRestaurant.create([
   {restaurant_id: 1 , feature_id: 1},
   {restaurant_id: 1, feature_id: 5},
@@ -106,7 +105,11 @@ FeaturesRestaurant.create([
   {restaurant_id: 10, feature_id: 12},
   {restaurant_id: 10, feature_id: 20},
   {restaurant_id: 10, feature_id: 25},
-  {restaurant_id: 11, feature_id: 26},
+  {restaurant_id: 11, feature_id: 6},
+  {restaurant_id: 12, feature_id: 10},
+  {restaurant_id: 12, feature_id: 12},
+  {restaurant_id: 12, feature_id: 20},
+  {restaurant_id: 12, feature_id: 25},
   {restaurant_id: 13, feature_id: 8},
   {restaurant_id: 14, feature_id: 1},
   {restaurant_id: 14, feature_id: 12},
@@ -116,7 +119,7 @@ FeaturesRestaurant.create([
   {restaurant_id: 16, feature_id: 1},
   {restaurant_id: 17, feature_id: 1},
   {restaurant_id: 18, feature_id: 1},
-  {restaurant_id: 18, feature_id: 1},
+  {restaurant_id: 18, feature_id: 1}
 ])
 
 

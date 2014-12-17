@@ -32,7 +32,11 @@ FeaturesRestaurant.create([
   {restaurant_id: 10, feature_id: 12},
   {restaurant_id: 10, feature_id: 20},
   {restaurant_id: 10, feature_id: 25},
-  {restaurant_id: 11, feature_id: 26},
+  {restaurant_id: 11, feature_id: 6},
+  {restaurant_id: 12, feature_id: 10},
+  {restaurant_id: 12, feature_id: 12},
+  {restaurant_id: 12, feature_id: 20},
+  {restaurant_id: 12, feature_id: 25},
   {restaurant_id: 13, feature_id: 8},
   {restaurant_id: 14, feature_id: 1},
   {restaurant_id: 14, feature_id: 12},
@@ -42,10 +46,6 @@ FeaturesRestaurant.create([
   {restaurant_id: 16, feature_id: 1},
   {restaurant_id: 17, feature_id: 1},
   {restaurant_id: 18, feature_id: 1},
-  {restaurant_id: 18, feature_id: 1},
+  {restaurant_id: 18, feature_id: 1}
 ])
 
-So you will need to go into psql and run a query to get those IDs.
-
-You could also do it like
- {restaurant_id: Restaurant.find_by(name: "Chipotle").id, feature_id: Feature.find_by(name: "Mexican")}

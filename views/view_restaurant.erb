@@ -5,4 +5,8 @@
 <br/>
 <%=@restaurant.phone_number%>
 <br/>
-<%=@restaurant.url%>
+<a href="<%=@restaurant.url%>"><%=@restaurant.url%></a>
+<h3>features</h3>
+<% @restaurant.features.each do |feature|%>
+  <%= feature.name%><br/>
+  <%end%>

@@ -1,5 +1,6 @@
 require 'sinatra'
 require 'sinatra/activerecord'
+require 'sinatra/flash'
 require_relative './models/user'
 require_relative './models/restaurant'
 require_relative './models/features_restaurant'
@@ -20,10 +21,7 @@ helpers do
     !session[:user_id].nil?
   end
 end
-#might want to add the errors in red later.
-before do
-  @errors ||=[]
-end
+
 get '/' do
   erb :index
 end
@@ -43,17 +41,17 @@ post '/login' do
       session[:user_id] = @user.id
       redirect('/user')  
     else
-      @errors << "incorrect password or email"
+      flash.now[:error]= "incorrect password or email"
       erb :index
     end
   else
-    @errors << "invalid email"
+    flash.now[:error]= "incorrect password or email"
     erb :index
   end
 end
 #display the user's home page
 get '/user' do
-  @user = c urrent_user
+  @user = current_user
   @events = @user.events 
   erb :user_home
 end
@@ -69,7 +67,7 @@ post '/create_event' do
   @event_user = EventsUser.find_by(user_id: @user.id, event_id: @event.id)
   @event_user.attending = true
   @event_user.save!
-  redirect('/view_event/#{@event.id}')
+  redirect("/view_event/#{@event.id}")
 end
 #this is the view_event page for every user
 get '/view_event/:id' do
@@ -83,16 +81,18 @@ get '/view_restaurant/:id' do
 end
 #find the user by email if they are in the database, then links them to the event. they have to be in the database already for this to work.
 post '/invite' do
-  @user = User.find_by(email: params[:email]) do
-    EventsUser.create!(user_id: @user.id, event_id: params[:event_id])
-    unless @user == nil
+  @user = User.find_by(email: params[:email])
+  unless @user == nil
+    EventsUser.create!(user_id: @user.id, event_id: params[:event_id])   
+  else
+    flash[:error]= "Unknown user #{params[:email]}, please ask them to signup!"
   end
-  redirect('/view_event/#{params[:event_id]}')  
+
+  redirect("/view_event/#{params[:event_id]}")  
 end
 #make a post request for /view_preferences
 get '/logout' do
   session.clear
     redirect('/')
-  end
 end
 
