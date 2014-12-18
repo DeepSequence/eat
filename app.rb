@@ -25,7 +25,7 @@ end
 get '/' do
   unless session[:user_id].nil?
     @user = current_user
-    @events = @user.events.sort_by {|x| x.event_date}
+    @events = @user.events.live.sort_by {|x| x.event_date}
   end
   erb :index
 end
@@ -127,8 +127,14 @@ post '/choose_restaurant' do
   redirect("/view_event/#{@event.id}")
 end
 
+post '/cancel_event' do
+  event= Event.find(params[:event_id])
+  event.cancel
+  redirect('/')
+end
+
 get '/logout' do
   session.clear
-    redirect('/')
+  redirect('/')
 end
 

@@ -1,5 +1,5 @@
 <!-- Name of restaurant-->
-<!DOCTYPE html>
+<section class="cloudy" id="restaurant-details">
 <h1><%=@restaurant.name%></h1>
 <%=@restaurant.address%>
 <br/>
@@ -10,3 +10,4 @@
 <% @restaurant.features.each do |feature|%>
   <%= feature.name%><br/>
   <%end%>
+</section>

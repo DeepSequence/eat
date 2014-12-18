@@ -6,6 +6,17 @@ class Event < ActiveRecord::Base
  has_many :features, through: :events_users_features
  belongs_to :restaurant
 
+def self.live
+  where(cancelled: false)
+end
+
+
+#setting the cancelled column to true
+def cancel
+  self.cancelled=true
+  self.save
+end
+
  def choose_restaurant
   #gets all restaurants from db
   restaurants = Restaurant.all

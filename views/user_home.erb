@@ -6,7 +6,13 @@
 <section id="all_events">
 <ol>
 <%@events.each do |event|%>
-  <li><a href="/view_event/<%=event.id%>"><%=event.name_of_event%></a> | <%=event.event_date.strftime("%F")%></li>
+  <li>
+    <a href="/view_event/<%=event.id%>"><%=event.name_of_event%></a>, 
+      <%=event.event_date.strftime("%F")%>
+      <% if !event.restaurant.nil? %>
+        , <%=event.restaurant.name%>
+      <% end %>
+  </li>
 <%end%>
 </section>
 </ol>

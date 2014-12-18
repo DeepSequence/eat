@@ -3,18 +3,13 @@
       <%=@event.event_date.strftime("%a %b %e %Y %I:%M %P")%>
   </h2>
   <% if @event.restaurant.nil? %>
-   <h3>Restaurant not yet selected, 
-   <form action="/choose_restaurant" method="post">
-    <input type="hidden" name="event_id" value="<%=@event.id%>">
-    <input type="submit" value="click here">
-    </form> to have computer choose
-    </h3>
+  
   <% else %>
     <h2>at <a href="/view_restaurant/<%=@event.restaurant.id%>"><%=@event.restaurant.name%></a> </h2>
   <% end %>
-
+<div class="subsection">
 <% if @event_user.selected_preferences %>
-  <h4>You have already selected the following preferences for this event</h4>
+  <p>You have already selected the following preferences for this event:</p>
   <% @event_user.features.each do |feature| %>
     <%= feature.name %><br/>
    <% end %>
@@ -23,6 +18,8 @@
        to select your preferences for this event
        </h4>
 <% end %>
+</div>
+<div class="subsection">
 <h3>List of Attendees</h3>
 <table>
 <tr><th>Name</th><th>Preferences selected</th></tr>
@@ -33,7 +30,13 @@
 <%end%>
 </table>
 <h3>Invite a friend</h3>
-<form action="/invite" method="post"><label>email:<input type='text'name='email' size='40'></label>
+<form action="/invite" method="post"><label>email:<input type='text'name='email' size='40'></label><br/>
 <input type="hidden" value="<%=@event.id%>"name="event_id"><input type="submit" value="invite">
 </form>
+<h3>Cancel the event!</h3>
+<form action="/cancel_event" method="post">
+  <input type="hidden" value="<%=@event.id%>"name="event_id">
+  <input type="submit" value="Cancel event" id="cancel">
+</form>
+</div>
 </section>
