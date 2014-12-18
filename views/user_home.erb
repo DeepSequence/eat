@@ -1,12 +1,13 @@
-<h1></h1>
-<div>
-<%= @user.name %>'s events
+<!DOCTYPE html>
+<div id ="userhome">
+<h1><%= @user.name %>'s events</h1>
 </div>
 <!-- show all events that user is associated with -->
-<a href="/new_event">Create a new event</a>
-<ul>
+<section id="all_events">
+<ol>
 <%@events.each do |event|%>
-  <li><a href="/view_event/<%=event.id%>"><%=event.name_of_event%></a></li>
+  <li><a href="/view_event/<%=event.id%>"><%=event.name_of_event%></a> | <%=event.event_date.strftime("%F")%></li>
 <%end%>
-</ul>
+</section>
+</ol>
 

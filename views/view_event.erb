@@ -1,15 +1,18 @@
-<h1><%=@event.name_of_event%></h1>
-<h2><%=@event.event_date.strftime("%F")%></h2>
-<% if @event.restaurant.nil? %>
+<section id="event-details" class="cloudy">
+  <h2><%=@event.name_of_event%> |
+      <%=@event.event_date.strftime("%a %b %e %Y %I:%M %P")%>
+  </h2>
+  <% if @event.restaurant.nil? %>
    <h3>Restaurant not yet selected, 
    <form action="/choose_restaurant" method="post">
     <input type="hidden" name="event_id" value="<%=@event.id%>">
     <input type="submit" value="click here">
     </form> to have computer choose
     </h3>
-<% else %>
-   <h2>at <a href="/view_restaurant/<%=@event.restaurant.id%>"><%=@event.restaurant.name%></a> </h2>
-<% end %>
+  <% else %>
+    <h2>at <a href="/view_restaurant/<%=@event.restaurant.id%>"><%=@event.restaurant.name%></a> </h2>
+  <% end %>
+
 <% if @event_user.selected_preferences %>
   <h4>You have already selected the following preferences for this event</h4>
   <% @event_user.features.each do |feature| %>
@@ -22,15 +25,15 @@
 <% end %>
 <h3>List of Attendees</h3>
 <table>
-<tr><th>name</th><th>Attending</th><th>Preferences selected</th></tr>
+<tr><th>Name</th><th>Preferences selected</th></tr>
 <%@event.events_users.each do |events_user|%>
   <tr><td><%=events_user.user.name%></td>
-      <td><%=events_user.attending ? "Yes" : "No"%></td>
       <td><%=events_user.selected_preferences ? "Yes" : "No"%></td>
   </tr>
 <%end%>
 </table>
-<h2>Invite a friend</h2>
-<form action="/invite" method="post"><label>email:<input type='text'name='email'></label>
+<h3>Invite a friend</h3>
+<form action="/invite" method="post"><label>email:<input type='text'name='email' size='40'></label>
 <input type="hidden" value="<%=@event.id%>"name="event_id"><input type="submit" value="invite">
 </form>
+</section>

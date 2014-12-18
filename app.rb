@@ -23,13 +23,17 @@ helpers do
 end
 
 get '/' do
+  unless session[:user_id].nil?
+    @user = current_user
+    @events = @user.events.sort_by {|x| x.event_date}
+  end
   erb :index
 end
 #create user, saves id in a session using the has_secure_password method
 post '/signup' do
   @user = User.create!(name: params[:name], email: params[:email], password: params[:password], password_confirmation: params[:password_confirmation])
   session[:user_id] = @user.id
-  redirect('/user')
+  redirect('/')
 end
 # looks at the email address the user typed in, 
 # if it finds the user, then it tries to authenticate the user using the has_secure_password method.
@@ -39,7 +43,7 @@ post '/login' do
   if @user
     if @user.authenticate(params[:password])
       session[:user_id] = @user.id
-      redirect('/user')  
+      redirect('/')  
     else
       flash.now[:error]= "incorrect password or email"
       erb :index
@@ -49,12 +53,7 @@ post '/login' do
     erb :index
   end
 end
-#display the user's home page
-get '/user' do
-  @user = current_user
-  @events = @user.events 
-  erb :user_home
-end
+
 #display the form to create a new event
 get '/new_event' do
   @user = current_user
@@ -65,7 +64,7 @@ post '/create_event' do
   @user = current_user
   @event = @user.events.create(name_of_event: params[:name], event_date: params[:event_date])
   @event_user = EventsUser.find_by(user_id: @user.id, event_id: @event.id)
-  @event_user.attending = true
+  @event_user.attending=true
   @event_user.save!
   redirect("/view_event/#{@event.id}")
 end
@@ -114,9 +113,11 @@ post '/save_preferences' do
   @features=params[:feature]
   #loop over all of the feature that were selected 
   @features.each do |feature| 
-  #create a association between event, user and feature
+    #create a association between event, user and feature
     EventsUsersFeature.create(events_user_id: event_user.id, feature_id: feature)
   end
+  event=Event.find(params[:event_id])
+  event.choose_restaurant
   redirect("/view_event/#{params[:event_id]}")
 end  
 #picks the restaurant and picks it into the event

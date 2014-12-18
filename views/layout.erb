@@ -5,13 +5,18 @@
     <link type="text/css" rel="stylesheet" href="/css/styles.css">
   </head>
   <body>
-    <header>
-      <div id="logo"><h1>Where2Eat</h1></div>
-      <nav id="home">
-      <a href="/" >home</a>
-      </nav>
-      <div id="login">
+    <header >
+      <div id="logo" class="cloudy"><h1>Where2Eat</h1></div>
+    </header>
+     <nav id="home" class="cloudy">
+      <ul>
+        <li>
+          <a href="/" >Home</a>
+        </li>
+        
         <% if !current_user? %>
+        <li>
+          login
           <form action="/login" method="post">
             <label>email
               <input type='text' name='email'/>
@@ -21,12 +26,18 @@
             </label>
               <input type ="submit" value="login"/>
           </form>
+        </li>
         <%else%>
-          <p> <a href="/user"><%=current_user.name %>'s events</a></p>
-          <a href="/logout" > logout</a>
+        |
+        <li>
+          <a href="/new_event">Create Event</a>
+        </li> |
+        <li>
+          <a href="/logout">Log Out</a>
+        </li>
         <%end%>
-      </div>
-    </header>
+       </ul> 
+    </nav>
       <%= styled_flash %>
       <%= yield %>
   </body>

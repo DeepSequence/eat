@@ -1,21 +1,27 @@
-<section id="info">
-<h1> Where to you want to eat? </h1>
+<!DOCTYPE html>
+<section id="info" class="cloudy">
+<h2> Where do you want to eat? </h2>
     <h2>Helping you and your friends decide what to eat</h2>
     <p>Can't decide where to go for lunch or dinner? Would you like the collective wisdom of your friends and the genius of this application to help you decide?</p>
     <p>After creating your account and saving your dietary and craving preferences, invite your friends to do the same! Our handy decision making tool will magically come up the best choice for you or your group.</p>
 </section>
-<section id="signup">
-<h2> Create an account</h2>
-<form action="/signup" method="post">
-  <label>name
-  <input type= 'text' name='name'/></label>
-  <label>email
-  <input type ='text' name='email'/></label>
-  <label>password
-  <input type ='password' name='password'/></label>
-  <label>confirm password
-  <input type ='password' name='password_confirmation'/></label>
-  <input type ="submit" value="signup"/>
-</form
+<section id="signup" class="cloudy">
+<% if !current_user? %>
+  <h2> Create an account</h2>
+  <form action="/signup" method="post">
+    <label>name
+    <input type= 'text' name='name'/></label>
+    <label>email
+    <input type ='text' name='email'/></label>
+    <label>password
+    <input type ='password' name='password'/></label>
+    <label>confirm password
+    <input type ='password' name='password_confirmation'/></label><br/>
+    <input type ="submit" value="signup"/>
+  </form>
+  <%else%>
+  <%= erb :user_home%>
+  <%end%>
+  
 </section>
 

@@ -1,5 +1,6 @@
 <!-- this page needs to have a big ass checkbox with preferences, and that needs to get saved with user.id it then gets redirected to view_event page
 -->
+<!DOCTYPE html>
 <form action="/save_preferences" method="post">
 <input type="hidden" name="event_id" value="<%=@event_id%>">
 <% @features.each do |feature|%>

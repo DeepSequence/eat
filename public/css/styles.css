@@ -1,30 +1,62 @@
+
 body{
   font-family: 'proxima-nova','Helvetica Neue', Arial, Helvetica, sans-serif;
-  padding:4px;
-  margin:4px;
-  background-color: #BCD7E7;
+  padding:10px;
+  margin:10px;
+  background-color: #CBDA53;
+  min-width:600px;
+    
 }
-
-/* header */
 
 header{
   width: 100%;
-  background-color: white;
   display: inline-block;
+  border: 2px solid white;
+  border-radius: 10px;
+  height:250px;
+  background-image: url("/img/banner.jpg")
 }
+
 div#logo{
-  float: left;  
-}
-nav#home {
-  float: left;
+  float: left; 
   margin-top: 30px;
   margin-left: 30px;
 }
-div#login {
-display: inline-block;
-float: right;
-margin-top: 20px;
-margin-right: 4px;
+
+.cloudy {
+  border-radius: 10px; 
+  background-color: white;
+  opacity: 0.7;
+}
+
+h1{
+  padding: 10px;
+  margin: 0px;
+}
+
+nav#home {
+  display: inline-block;
+  width: 100%;
+  float: left;
+  text-decoration: none;
+  margin-bottom: 4px;
+}
+
+nav a {
+  text-decoration: none;
+  color: black;
+}
+
+nav a:hover {
+  color:blue;
+}
+
+nav#home li {
+  background: inherit;
+}
+nav form {
+  color: black;
+  display: inline-block;
 }
 
 .error {
@@ -32,16 +64,44 @@ margin-right: 4px;
 }
 /* Index.erb */
 section#info{
-  border: 2px solid white;
-  border-radius: 3px;
+  border: 4px solid white;
+  border-radius: 10px;
   float: left;
-  width: 45%;
+  width: 46%;
+  padding: 5px;
+  font-size: 14px;
 }
 section#signup{
-  border: 2px solid white;
-  border-radius: 3px;
+  border: 4px solid white;
+  border-radius: 10px;
   float: right;
-  width: 45%;
+  width: 46%;
+  padding: 5px;
+}
+section#event-details {
+  float: left;
+  margin-bottom: 25px;
+  padding-left:10px;
+  padding-bottom:10px;
+  width: 99%;
+  margin-right: 70px;
+}
+h2 {
+  width: 100%;
+  padding: 0px;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+
+}
+
+.all_events{
+  float right;
+  text-decoration: none;
+  font-style: bold;
+
 }
 table {
   border-collapse: collapse;
@@ -49,6 +109,7 @@ table {
 td {
   font-size: 12px;
   border: 1px solid black;
+  text-align: center;
 }
 th {
   border: 1px solid black;
@@ -62,6 +123,7 @@ label{
   font-family: Arial;
   font-size: 15px;
   display: inline-block;
+
 }
 nav li{
   font-family: Arial;
@@ -74,15 +136,16 @@ nav li{
 li a{
   text-decoration: none;
   display: inline-block;
-  padding: 2em;
 }
 
 input[type=submit] {
     color:#08233e;
-    font:2.4em Arial;
-    font-size:70%;
+    font:5em Arial;
+    font-size:80%;
     /* ... other rules ... */
     cursor:pointer;
+    opacity: 1;
+    margin-left: 75px;
 }
 
 input[type=submit]:hover {
