@@ -29,7 +29,7 @@
 * [Complete list of user stories here](https://github.com/minmcknight/eat/issues?q=is%3Aissue+)"User Stories on Github"
 
 ##ERD
-* 
+![erd](Where2Eat.png)
 
 ##What's next?
 * See the app with restaurant data from Yelp api.
