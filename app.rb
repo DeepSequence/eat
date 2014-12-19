@@ -94,7 +94,8 @@ post '/invite' do
     Pony.mail :to => params[:email],
             :from => "invites@where2eat.io",
             :subject => "Please create an account to start using Where2Eat!",
-            :body => erb(:email)
+            :body => erb(:email),
+            :headers => { 'Content-Type' => 'text/html' }
   end
   redirect("/view_event/#{params[:event_id]}")  
 end
