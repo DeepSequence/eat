@@ -84,28 +84,27 @@ get '/view_restaurant/:id' do
   erb :view_restaurant
 end
 
-#find the user by email if they are in the database, then links them to the event. they have to be in the database already for this to work.
+#find the user by email if they are in the database, then links them to the event. If they are not in db, send them an email, asking them to create an account on Where2Eat.
 post '/invite' do
   @user = User.find_by(email: params[:email])
+  @event = Event.find(params[:event_id])
   unless @user == nil
-    EventsUser.create!(user_id: @user.id, event_id: params[:event_id])   
+    EventsUser.create!(user_id: @user.id, event_id: params[:event_id])
+    Pony.mail :to => params[:email],
+            :from => "invites@where2eat.io",
+            :subject => "You have been invited to a new event on Where2Eat",
+            :html_body => erb(:invite, :layout => false)  
   else
     flash[:error]= "Unknown user #{params[:email]}, sign up email sent."
     Pony.mail :to => params[:email],
             :from => "invites@where2eat.io",
             :subject => "Please create an account to start using Where2Eat!",
-            :html_body => "<p>Hello,</p>
-                           <p>Good news. Somebody wants to eat with you.</p>
-                            <p>Please visit <a href='https://desolate-plateau-3067.herokuapp.com/'>Where2Eat</a> and Sign Up so they can invite you!</p>
-                          <p>Thanks,</p>
-                          <p>Your friends at Where2Eat</p>"
+            :html_body => erb(:email, :layout => false)
   end
   redirect("/view_event/#{params[:event_id]}")  
 end
 
-
-
-#make a post request for /view_preferences
+# Show the restaurant feature preferences form.
 get '/pick_preferences/:event_id' do
   @event_id = params[:event_id]
   @features = Feature.all.sort {|a,b| a.name <=> b.name}
@@ -131,12 +130,6 @@ post '/save_preferences' do
   event.choose_restaurant
   redirect("/view_event/#{params[:event_id]}")
 end  
-#picks the restaurant and picks it into the event
-post '/choose_restaurant' do
-  @event = Event.find(params[:event_id])
-  @event.choose_restaurant
-  redirect("/view_event/#{@event.id}")
-end
 
 post '/cancel_event' do
   event= Event.find(params[:event_id])

@@ -30,8 +30,8 @@ end
     features.each do |feature|
       #add one to score for each matching feature
       if restaurant.features.exists?(feature.id)
-        score += 1
-      end
+        score = score+1
+      end   
     end
     #set the score for this restaurant into the hash
     restaurant_scores[restaurant.id] = score
