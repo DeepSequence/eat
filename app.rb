@@ -94,7 +94,6 @@ post '/invite' do
     Pony.mail :to => params[:email],
             :from => "invites@where2eat.io",
             :subject => "Please create an account to start using Where2Eat!",
-            :headers => { 'Content-Type' => 'text/html' },
             :html_body => "<p>Hello,</p>
                            <p>Good news. Somebody wants to eat with you.</p>
                             <p>Please visit <a href='https://desolate-plateau-3067.herokuapp.com/'>Where2Eat</a> and Sign Up so they can invite you!</p>
