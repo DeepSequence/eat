@@ -1,3 +1,4 @@
+require 'pony'
 require 'sinatra'
 require 'sinatra/activerecord'
 require 'sinatra/flash'
@@ -89,10 +90,16 @@ post '/invite' do
   unless @user == nil
     EventsUser.create!(user_id: @user.id, event_id: params[:event_id])   
   else
-    flash[:error]= "Unknown user #{params[:email]}, please ask them to signup!"
+    flash[:error]= "Unknown user #{params[:email]}, sign up email sent."
+    Pony.mail :to => params[:email],
+            :from => "invites@where2eat.io",
+            :subject => "Please create an account to start using Where2Eat!",
+            :body => erb(:email)
   end
   redirect("/view_event/#{params[:event_id]}")  
 end
+
+
 
 #make a post request for /view_preferences
 get '/pick_preferences/:event_id' do
