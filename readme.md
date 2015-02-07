@@ -6,7 +6,7 @@
 
 >Where2Eat is an app that allows users to create an lunch or dinner event, invite other users, and get a restaurant recommendation generated behind the scenes by Ruby logic.
 
-[visit Where2Eat](https://desolate-plateau-3067.herokuapp.com/"Where2Eat")
+[visit Where2Eat](https://desolate-plateau-3067.herokuapp.com/)
 
 ##Technologies Used
 * Ruby 2.1.2
