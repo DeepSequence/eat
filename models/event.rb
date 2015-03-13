@@ -17,6 +17,9 @@ def cancel
   self.save
 end
 
+
+#chooses a restaurant by counting the number of matches between the restaurant's
+#features and the preferences of the people attending the event
  def choose_restaurant
   #gets all restaurants from db
   restaurants = Restaurant.all
